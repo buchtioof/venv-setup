@@ -20,7 +20,7 @@ fi
 create_venv() {
     if [ -z "$venv_path" ]; then
         echo "No virtual environment found."
-        read -p "Type the name of your venv: " name
+        read -p "Type the name of your venv: " name < /dev/tty
         echo "Creating virtual environment: $name"
         python3 -m venv "$name"
         venv_path="./$name"
@@ -30,14 +30,12 @@ create_venv() {
 
 # --- Add venv to .gitignore
 gitignore() {
-    if [ -f .gitignore ]; then
-        if grep -qx "$venv_path" .gitignore; then
-            return
-        fi
+    if [ -f .gitignore ] && grep -qx "$venv_path" .gitignore; then
+        return
     fi
 
     echo "Do you want to add the venv to .gitignore? (recommended)"
-    read -p " y / n " choice
+    read -p " y / n " choice < /dev/tty
     if [ "$choice" = "y" ]; then
         echo "$venv_path" >> .gitignore
         echo "Added $venv_path to .gitignore"
@@ -61,7 +59,7 @@ activate_venv() {
 requirements() {
     if [ -n "$existing_req" ]; then
         echo "requirements.txt detected. Install dependencies?"
-        read -p " y / n " choice
+        read -p " y / n " choice < /dev/tty
         if [ "$choice" = "y" ]; then
             pip install -r "$existing_req"
             echo "Dependencies installed"
@@ -69,14 +67,15 @@ requirements() {
     fi
 }
 
-# --- Install packages interactively
+# --- Install one package
 installer() {
-    read -p "Type the package you need to install: " package
+    read -p "Type the package you need to install: " package < /dev/tty
     pip install "$package"
 }
 
+# --- Alfred logic (first question + follow-ups)
 alfred() {
-    read -p "Do you want to install a package? (y / n) " choice
+    read -p "Do you want to install a package? (y / n) " choice < /dev/tty
     if [ "$choice" != "y" ]; then
         return
     fi
@@ -84,7 +83,7 @@ alfred() {
     installer
 
     while true; do
-        read -p "Do you want to install another package? (y / n) " choice
+        read -p "Do you want to install another package? (y / n) " choice < /dev/tty
         if [ "$choice" = "y" ]; then
             installer
         else
@@ -92,7 +91,6 @@ alfred() {
         fi
     done
 }
-
 
 # ------------------ MAIN ------------------
 
@@ -106,4 +104,3 @@ echo ""
 echo "Your venv is ready!"
 echo "To activate it later, run:"
 echo "source \"$venv_path/bin/activate\""
-
