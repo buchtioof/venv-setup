@@ -9,6 +9,7 @@ the project is to continue to learn deeper bash scripting and try to make a scri
 - [x] create your venv and asks the name
 - [x] adds the venv in gitignore to avoid useless commits
 - [x] starts the venv to install packages by asking the user which ones
+- [x] possible to run with one command (check below)
 
 ## how to use
 to run the script, use this command:
