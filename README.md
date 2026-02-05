@@ -13,7 +13,7 @@ the project is to continue to learn deeper bash scripting and try to make a scri
 ## how to use
 to run the script, use this command:
 
-`curl -fsSL https://raw.githubusercontent.com/buchtioof/venv-setup/main/venvsetup.sh | bash -s`
+`bash <(curl -fsSL https://raw.githubusercontent.com/buchtioof/venv-setup/main/venvsetup.sh)`
 > be sure to use it INSIDE your workspace
 
 *(tested and works fine on Debian, soon testing on macos)*
