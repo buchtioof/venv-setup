@@ -17,4 +17,4 @@ to run the script, use this command:
 `bash <(curl -fsSL https://raw.githubusercontent.com/buchtioof/venv-setup/main/venvsetup.sh)`
 > be sure to use it INSIDE your workspace
 
-*(tested and works fine on Debian, soon testing on macos)*
+*(tested and works fine on Debian and macos)*
